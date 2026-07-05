@@ -66,6 +66,7 @@ pip install -r requirements.txt
 ## Dataset
 
 This project uses the Credit Card Fraud Detection dataset available on Kaggle.
+"https://www.kaggle.com/datasets/ealaxi/paysim1?resource=download"
 
 Place the `creditcard.csv` file in the project directory before running the application.
 
