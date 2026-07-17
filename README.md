@@ -1,120 +1,110 @@
-# Adaptive Hybrid AI Verification System for Web Transactions
+import os
 
-This repository contains the implementation of my ST5001CMD Artificial Intelligence individual coursework. The project combines machine learning and heuristic search to build an adaptive verification system for web transactions. Its goal is to improve security while reducing unnecessary verification steps for legitimate users.
+# Define target folder and content matching project updates
+target_dir = r"C:\Users\Asus Tuf\Desktop\3rd Sem AI project"
+content = """# Adaptive Hybrid AI Verification System for Web Transactions
+
+This repository contains the complete implementation of the **ST5001CMD Artificial Intelligence** individual coursework submission for the March Intake 2026 session. The project engineers a novel, resilient Hybrid AI Architecture that combines statistical ensemble classification mechanics with an informed graph-search framework to dynamically manage web transaction verification pipelines. The platform balances institutional transaction security against consumer onboarding drop-off risks by optimizing user verification pathways under real-world behavioral uncertainty.
 
 ---
 
 ## Project Overview
 
-Traditional authentication systems often rely on fixed rules that apply the same verification process to every user. This can either increase user friction by requiring unnecessary verification or reduce security by allowing risky transactions to proceed without additional checks.
+Traditional fraud prevention architectures rely on rigid, rule-based authentication workflows or standalone machine learning inference blocks operating in total isolation. Static rules introduce excessive user friction, leading to high cart abandonment rates, while standalone predictive classifiers lack the context required to dynamically budget latency, external API execution expenses, and cumulative user friction constraints.
 
-This project addresses that problem by combining two AI techniques:
+This individual codebase overcomes these modular limitations by bridging two highly optimized syllabus paradigms:
+* **Machine Learning Layer:** A robust Random Forest Classifier is augmented with an in-memory over-sampling protocol to evaluate transaction patterns and generate a continuous fraud probability matrix (0.0 <= P_Fraud <= 1.0).
+* **Heuristic Search Layer:** An Informed A* Search framework ingests the continuous threat probability vector to dynamically warp its heuristic cost estimation topology (h(n)), calculating the path of absolute lowest user friction necessary to clear the session securely.
 
-- **Machine Learning:** A Random Forest Classifier analyzes transaction data (`Time`, `Amount`, `V1`–`V28`) and predicts the probability that a transaction is fraudulent.
-- **Heuristic Search:** An A* Search algorithm uses the predicted fraud probability to determine the most appropriate verification path for each transaction.
+---
 
-Instead of making decisions based only on predefined rules, the system adapts its verification process according to the estimated level of risk.
+## Technical Features & In-Memory Architectures
 
-### How It Works
+### 1. Robust Feature Selection and Schema Layout
+The ingestion pipeline targets an explicit structural feature matrix extracted directly from the raw data logs rather than unexplainable variables. The code maps five key indicators from the CSV database layout:
+* Time: Continuous time log sequence capturing seconds elapsed since the dataset baseline.
+* Amount: The absolute monetary size of the active transaction to trap rapid velocity spikes.
+* V1 & V2: Anonymized behavioral vectors derived via Principal Component Analysis (PCA) tracking interaction characteristics.
+* Class: The binary validation target label (1 = Fraud, 0 = Legitimate).
 
-1. A transaction is provided as input.
-2. The Random Forest model predicts the likelihood of fraud.
-3. The prediction is converted into a risk score.
-4. The A* Search algorithm uses this score as part of its heuristic function.
-5. The algorithm selects the most suitable verification route.
+### 2. Resolving Class Imbalance via In-Memory SMOTE
+Real-world transactional fraud records are heavily skewed (>99% legitimate transactions), exposing standard architectures to the accuracy paradox. To make the learning layer genuinely robust, the codebase integrates a **Synthetic Minority Over-sampling Technique (SMOTE)** preprocessing block. Running strictly on the training partition within volatile RAM via VS Code, SMOTE synthesizes mathematically distinct intermediate fraud vectors. This pushes the internal training matrix to a clean 50/50 balance ratio, ensuring highly precise decision trees while leaving the test partition un-sampled to guarantee realistic academic evaluation metrics.
 
-For example:
+### 3. Genuine A* Heuristic Path Planning
+The A* engine handles the sequential business logic workflow. Rather than using static thresholds, the search space uses the standard graph optimization equation:
 
-- **Low-risk transactions** are processed through a fast verification path with minimal user interruption.
-- **High-risk transactions** are routed through additional security steps such as multi-factor authentication before approval.
+f(n) = g(n) + h(n)
 
-This approach allows the system to balance security and user experience by making verification decisions based on predicted risk rather than static rules.
+When P_Fraud breaches a calibrated post-SMOTE threshold (>0.40), the heuristic evaluation function (h(n)) for the automated bypass lane scales dynamically to infinity. This mathematically warps the search space topology, forcing the A* priority queue to drop the frictionless clearance node and explore alternative multi-stage verification routes (e.g., initiating Multi-Factor challenges or administrative holds) based on live system latency vectors.
 
 ---
 
 ## Repository Structure
 
-```
 .
-├── Kaggle's_credit_card_fraud_repository.py   # Main application containing data processing, model training, prediction, and A* search
-├── README.md                                  # Project documentation
-└── requirements.txt                           # Project dependencies (optional)
-```
+├── creditcard.csv                             # Local gold-standard dataset file (User Provided)
+├── Kaggle's_credit_card_fraud_repository.py   # Complete integrated Hybrid System codebase
+└── README.txt                                 # Up-to-date academic project documentation
 
 ---
 
-## Installation
+## Installation & Setup
 
 ### Prerequisites
+* Python 3.10 or later
+* Access to a terminal environment with administration privileges for package distribution setups.
 
-- Python 3.10 or later
+### Environmental Dependencies
+Install the required data processing, visualization, and specialized imbalance learning frameworks using pip:
 
-Install the required packages:
-
-```bash
-pip install numpy pandas scikit-learn matplotlib
-```
-
-If a `requirements.txt` file is included, you can install everything with:
-
-```bash
-pip install -r requirements.txt
-```
+pip install numpy pandas scikit-learn matplotlib seaborn imbalanced-learn
 
 ---
 
-## Dataset
+## Dataset Configuration
 
-This project uses the Credit Card Fraud Detection dataset available on Kaggle.
-"https://www.kaggle.com/datasets/ealaxi/paysim1?resource=download"
+The implementation targets the definitive academic gold-standard Kaggle Credit Card Fraud Detection dataset (284,807 real European cardholder records).
 
-Place the `creditcard.csv` file in the project directory before running the application.
+1. Download the database file directly from the verified data repository:  
+   https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+2. Extract the file and ensure the physical database sheet is named exactly creditcard.csv.
+3. Move the extracted file directly into your local machine's dedicated workspace directory:  
+   C:\\Users\\Asus Tuf\\Desktop\\3rd Sem AI project\\
 
-The dataset is not included in this repository because it exceeds GitHub's file size limit.
+Important Operational Note: The script interacts with the physical data log securely on disk without modifying the raw database. The source CSV remains completely unaltered as all cleaning, array slicing, and SMOTE rebalancing occur dynamically in-memory at runtime.
 
 ---
 
-## Running the Project
+## Running the Architecture
 
-Run the application using:
+Execute the complete hybrid pipeline via the command line or within VS Code by running:
 
-```bash
 python "Kaggle's_credit_card_fraud_repository.py"
-```
 
-The program will:
-
-- Load and preprocess the dataset.
-- Train the Random Forest classifier.
-- Predict fraud probability for a transaction.
-- Use A* Search to determine the appropriate verification path.
-- Display the prediction results and selected verification route.
-
----
-
-## Technologies Used
-
-- Python
-- NumPy
-- Pandas
-- Scikit-learn
-- Random Forest Classifier
-- A* Search Algorithm
+### System Execution Steps:
+1. Data Ingestion Layer: Loads a dense, consecutive 150,000-record partition from local storage disk.
+2. SMOTE Layer: Programmatically isolates the training split in memory and generates synthetic minority instances to balance the classes.
+3. Model Training: Fits 100 base estimator decision trees capped at a maximum structural depth of 10 layers to preserve host memory.
+4. Predictive Inference: Extracts probabilistic threat vectors for live interactive sample checks.
+5. A* Routing Engine: Executes graph-search optimizations across network nodes, outputting the most efficient verification pipeline target alongside path friction metrics.
+6. Report Visualizer: Automatically updates and saves professional high-resolution figures (confusion_matrix.png, feature_importance.png, table_b1.png, and table_b2.png) directly into your local project folder.
 
 ---
 
-## Project Features
+## Author & Academic Affiliation
 
-- Credit card fraud detection using machine learning
-- Adaptive verification based on transaction risk
-- A* Search for decision-making
-- Dynamic verification routing
-- Simple command-line implementation
+* Author: Biraj Sharma Chapagain
+* Student Identification Number (UID): 250125
+* Module Details: ST5001CMD - Artificial Intelligence Individual Coursework
+* Academic Institution: Softwarica College of IT and E-Commerce in partnership with Coventry University
+* Module Leader / Evaluator: Suman Shrestha
+"""
 
----
+if not os.path.exists(target_dir):
+    os.makedirs(target_dir)
 
-## Author
+file_path = os.path.join(target_dir, "README.txt")
+with open(file_path, "w", encoding="utf-8") as f:
+    f.write(content.strip())
 
-**Biraj Sharma Chapagain**
-
-ST5001CMD – Artificial Intelligence Coursework"# ai_project" 
+print(f"[SUCCESS] README.txt file has been successfully generated at: {file_path}")
