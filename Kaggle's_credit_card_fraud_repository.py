@@ -131,20 +131,27 @@ class InformedRoutePlanner:
 
     def evaluate_heuristic(self, state: SystemVerificationState):
         """Maintains reasoning under uncertainty dynamically based on risk scores."""
+        # This is where A* search utility is generated over a simple classifier.
+        # The heuristic dynamic shapes the search landscape based on ML probability.
+        
         if state == self.GOAL:
             return 0.0
             
         if state == self.BYPASS:
+            # If probability is high, the cost to bypass becomes mathematically infinite,
+            # forcing the A* search loop to explore other paths.
             if self.p_fraud > 0.50:
-                return float('inf')  # Prevent automated entry if risk is elevated
+                return float('inf') 
             return self.p_fraud * 200.0
 
         if state == self.CHALLENGE:
+            # Moderate risk routes here; cost decreases as fraud probability increases.
             return (1.0 - self.p_fraud) * 80.0
 
         if state == self.TERMINATE:
+            # High risk routes. Factor in system constraints (latency).
             if self.latency > 100:
-                return float('inf')
+                return float('inf') # Constraint violation
             return (1.0 - self.p_fraud) * 600.0
 
         return 50.0
@@ -197,6 +204,10 @@ class AnalyticalVisualizer:
         # Explicit definition of the exact destination path
         target_directory = r"C:\Users\Asus Tuf\Desktop\3rd Sem AI project"
         
+        # Ensure directory exists before saving (robustness)
+        if not os.path.exists(target_directory):
+            os.makedirs(target_directory)
+
         # --- Figure 1: Confusion Matrix ---
         plt.figure(figsize=(6, 4.5))
         y_pred = classifier.model.predict(classifier.X_test)
@@ -216,6 +227,7 @@ class AnalyticalVisualizer:
 
         # --- Figure 2: Feature Importance Histogram ---
         plt.figure(figsize=(7, 4))
+        # Note: Must match features used in training (execute_model_training)
         feature_names = ['Time', 'Amount', 'V1', 'V2']
         importances = classifier.model.feature_importances_
         
@@ -246,6 +258,7 @@ if __name__ == "__main__":
     classifier = AcademicRiskClassifier()
     
     # 2. Define interactive query data sample parameters [Time, Amount, V1, V2]
+    # Sample format matching dataset schema
     sample_safe_txn = [0.0, 149.62, -1.359807, -0.072781]
     sample_fraud_txn = [406.0, 0.00, -2.312227, 1.951992]
     
