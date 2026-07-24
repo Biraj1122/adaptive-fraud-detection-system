@@ -91,9 +91,12 @@
 
 # Prerequisites:
 # - Python 3.10+
-# - Access to a terminal environment with privileges to install packages
+# - Terminal environment with privileges to install packages
 
-# Install Dependencies via Pip:
+# Environmental Dependencies:
+# Install the required data processing, visualization, web framework, 
+# and specialized imbalance learning libraries using pip:
+
 pip install numpy pandas scikit-learn matplotlib seaborn imbalanced-learn streamlit
 
 
@@ -103,7 +106,7 @@ pip install numpy pandas scikit-learn matplotlib seaborn imbalanced-learn stream
 #    European cardholder records) directly from: 
 #    https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
 # 2. Extract the archive and ensure the file is named creditcard.csv.
-# 3. Place creditcard.csv directly into your workspace directory:
+# 3. Place creditcard.csv directly into your dedicated workspace directory:
 #    C:\Users\Asus Tuf\Desktop\3rd Sem AI project\
 
 # Note: Source CSV remains completely unaltered on disk; all cleaning and 
@@ -116,7 +119,7 @@ pip install numpy pandas scikit-learn matplotlib seaborn imbalanced-learn stream
 # Option A: Launch Interactive Streamlit Dashboard
 streamlit run app.py
 
-# Option B: Execute CLI Backend & Automated Visualization Extraction
+# Option B: Execute the CLI Pipeline
 python "Kaggle's_credit_card_fraud_repository.py"
 
 
