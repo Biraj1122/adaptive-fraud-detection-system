@@ -185,6 +185,51 @@ class InformedRoutePlanner:
                         open_list.append(neighbor)
                         
         return None, float('inf')
+    
+    def draw_state_graph_figure(self):
+        """Draws the state graph using Matplotlib so Graphviz binary isn't required."""
+        fig, ax = plt.subplots(figsize=(10, 3.5), dpi=300)
+        ax.axis('off')
+        fig.patch.set_facecolor('#0e1117') # Streamlit dark mode background
+        
+        path, _ = self.run_pathfinding_optimization()
+        selected_state = path[1].name if path else ""
+
+        # Nodes setup
+        nodes = {
+            "START": (0.1, 0.5, "UNVERIFIED_ENTRY_QUEUE\n(Start)", "#262730"),
+            "BYPASS": (0.5, 0.8, f"FRICTIONLESS_AUTO_CLEARANCE\nCost: {self.BYPASS.friction_cost}", "#27ae60" if selected_state == self.BYPASS.name else "#262730"),
+            "CHALLENGE": (0.5, 0.5, f"MFA_IDENTITY_CHALLENGE\nCost: {self.CHALLENGE.friction_cost}", "#f39c12" if selected_state == self.CHALLENGE.name else "#262730"),
+            "TERMINATE": (0.5, 0.2, f"ACCOUNT_SUSPENSION_HOLD\nCost: {self.TERMINATE.friction_cost}", "#e74c3c" if selected_state == self.TERMINATE.name else "#262730"),
+            "GOAL": (0.9, 0.5, "RESOLVED_COMPLIANCE_TARGET\n(Goal)", "#27ae60")
+        }
+
+        # Draw edges
+        transitions = [
+            ("START", "BYPASS", self.BYPASS.name),
+            ("START", "CHALLENGE", self.CHALLENGE.name),
+            ("START", "TERMINATE", self.TERMINATE.name),
+            ("BYPASS", "GOAL", self.BYPASS.name),
+            ("CHALLENGE", "GOAL", self.CHALLENGE.name),
+            ("TERMINATE", "GOAL", self.TERMINATE.name),
+        ]
+
+        for src, dst, state_name in transitions:
+            x1, y1 = nodes[src][0], nodes[src][1]
+            x2, y2 = nodes[dst][0], nodes[dst][1]
+            is_active = (selected_state == state_name)
+            color = "#27ae60" if is_active else "#41444C"
+            lw = 2.5 if is_active else 1.0
+            ax.annotate("", xy=(x2, y2), xytext=(x1, y1),
+                        arrowprops=dict(arrowstyle="->", color=color, lw=lw, mutation_scale=15))
+
+        # Draw node boxes
+        for key, (x, y, label, bg_color) in nodes.items():
+            ax.text(x, y, label, ha="center", va="center", color="white", fontsize=8, fontweight="bold",
+                    bbox=dict(boxstyle="round,pad=0.5", facecolor=bg_color, edgecolor="#ffffff" if selected_state in label else "#555555", lw=1.5))
+
+        plt.tight_layout()
+        return fig
 
 
 # =====================================================================
