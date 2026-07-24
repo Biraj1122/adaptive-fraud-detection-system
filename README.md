@@ -33,7 +33,7 @@
         #    heuristic cost estimation topology h(n), calculating the path of 
         #    absolute lowest user friction necessary to clear the session securely.
 
-## TECHNICAL FEATURES & IN-MEMORY ARCHITECTURES
+## 1. TECHNICAL FEATURES & IN-MEMORY ARCHITECTURES
 
         # 1. Feature Selection and Schema Layout:
         #    The ingestion pipeline targets an explicit structural feature matrix 
